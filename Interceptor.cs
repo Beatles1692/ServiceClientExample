@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Reflection;
 using Castle.DynamicProxy;
 
@@ -17,12 +16,9 @@ namespace ServiceClientExample
 
            var serviceClient = invocation.InvocationTarget as IServiceClient;
            if(serviceClient==null) return;
-           var strategyAttribute = invocation.Method.GetCustomAttribute<AuthenticationStrategyAttribute>() ?? invocation.TargetType.GetCustomAttribute<AuthenticationStrategyAttribute>();
+           var strategyAttribute = invocation.MethodInvocationTarget.GetCustomAttribute<AuthenticationStrategyAttribute>() ?? invocation.TargetType.GetCustomAttribute<AuthenticationStrategyAttribute>();
            if(strategyAttribute == null) return ;
            AuthenticationStrategies.GetStrategy(strategyAttribute.Strategy)(serviceClient);
         }
-         
-
-        
     }
 }

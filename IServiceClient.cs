@@ -4,6 +4,6 @@ namespace ServiceClientExample
 {
     public interface IServiceClient
     {
-        DummyHttpClient HttpClient {get; set;}
+        DummyHttpClient HttpClient {get;}
     }
 }
