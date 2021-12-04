@@ -1,13 +1,15 @@
+using System.Net.Http;
+
 namespace ServiceClientExample
 {
     [AuthenticationStrategy(nameof(ServiceClientSample))]
     public class ServiceClientSample : IServiceClientSample
     {
-        public ServiceClientSample(DummyHttpClient httpClient)
+        public ServiceClientSample(HttpClient httpClient)
         {
             HttpClient = httpClient;
         }
-        public DummyHttpClient HttpClient {get;private set;}
+        public HttpClient HttpClient {get;private set;}
 
         [AuthenticationStrategy(nameof(CustomStrategy))]
         public void CustomStrategy()

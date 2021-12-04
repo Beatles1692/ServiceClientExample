@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 
 namespace ServiceClientExample
 {
@@ -14,15 +15,15 @@ namespace ServiceClientExample
         private static Dictionary<string, Action<IServiceClient>> _strategies = new Dictionary<string, Action<IServiceClient>>{
             {
                 SystemAuthentication,
-                new Action<IServiceClient>(client => client.HttpClient.AuthenticationStrategy = SystemAuthentication)
+                new Action<IServiceClient>(client => client.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "SystemToken"))
             },
             {
                 UserAuthentication,
-                new Action<IServiceClient>(client => client.HttpClient.AuthenticationStrategy = UserAuthentication)
+                new Action<IServiceClient>(client => client.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "UserToken"))
             },
             {
                 NoAuthentication,
-                new Action<IServiceClient>(client => client.HttpClient.AuthenticationStrategy = NoAuthentication)
+                new Action<IServiceClient>(client => {})
             }
         };
 

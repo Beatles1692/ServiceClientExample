@@ -1,9 +1,9 @@
-using System;
+using System.Net.Http;
 
 namespace ServiceClientExample
 {
     public interface IServiceClient
     {
-        DummyHttpClient HttpClient {get;}
+        HttpClient HttpClient {get;}
     }
 }
